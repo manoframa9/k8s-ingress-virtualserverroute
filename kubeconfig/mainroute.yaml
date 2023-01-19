@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mainroute
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demoapp01
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demoapp02
+---
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: aiath-internet
+  namespace: mainroute
+spec:
+  host: localhost
+  routes:
+  - path: /app01
+    route: demoapp01/app01rt
+  - path: /app02
+    route: demoapp02/app02rt
+---
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: app01rt
+  namespace: demoapp01
+spec:
+  host: localhost
+  upstreams:
+  - name: app01svc01
+    service: app01svc01
+    port: 80
+  - name: app01svc02
+    service: app01svc02
+    port: 80
+  subroutes:
+  - path: /app01/svc01
+    action:
+      return:
+        code: 200
+        type: text/plain
+        body: "Hello World -- app01svc01\n"
+  - path: /app01/svc02
+    action:
+      return:
+        code: 200
+        type: text/plain
+        body: "Hello World -- app01svc02\n"
+---
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServerRoute
+metadata:
+  name: app02rt
+  namespace: demoapp02
+spec:
+  host: localhost
+  upstreams:
+  - name: app02svc01
+    service: app02svc01
+    port: 80
+  - name: app02svc02
+    service: app02svc02
+    port: 80
+  subroutes:
+  - path: /app02/svc01
+    action:
+      return:
+        code: 200
+        type: text/plain
+        body: "Hello World -- app02svc01\n"
+  - path: /app02/svc02
+    action:
+      return:
+        code: 200
+        type: text/plain
+        body: "Hello World -- app02svc02\n"
