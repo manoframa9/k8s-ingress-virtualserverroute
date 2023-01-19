@@ -23,6 +23,7 @@ echo "=========================================================="
 kubectl cluster-info --context kind-pocvsr
 echo "=========================================================="
 # echo "======= create ingress controller ========================"
-kc create -f kubeconfig/nginx-ingress.yaml
-kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
-kc create -f kubeconfig/testapp01.yaml 
+# kc create -f kubeconfig/nginx-ingress.yaml
+# kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
+# kc create -f kubeconfig/testapp01.yaml 
+# kc create -f kubeconfig/testapp02.yaml 
