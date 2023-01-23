@@ -27,3 +27,17 @@ echo "=========================================================="
 # kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 # kc create -f kubeconfig/testapp01.yaml 
 # kc create -f kubeconfig/testapp02.yaml 
+#####################################################################
+# kubectl apply -f common/ns-and-sa.yaml
+# kubectl apply -f rbac/rbac.yaml
+# kubectl apply -f common/default-server-secret.yaml
+# kubectl apply -f common/nginx-config.yaml
+# kubectl apply -f common/ingress-class.yaml
+# kubectl apply -f common/crds/k8s.nginx.org_virtualservers.yaml
+# kubectl apply -f common/crds/k8s.nginx.org_virtualserverroutes.yaml
+# kubectl apply -f common/crds/k8s.nginx.org_transportservers.yaml
+# kubectl apply -f common/crds/k8s.nginx.org_policies.yaml
+# kubectl apply -f common/crds/k8s.nginx.org_globalconfigurations.yaml
+# kubectl apply -f daemon-set/nginx-ingress.yaml
+###### >> for real use #####  kubectl apply -f service/loadbalancer.yaml
+# kubectl create -f service/nodeport.yaml

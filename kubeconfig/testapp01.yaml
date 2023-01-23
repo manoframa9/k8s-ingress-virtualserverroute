@@ -73,14 +73,16 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /app02/srv01(/|$)(.*)
+        # path: /app01/srv01(/|$)(.*)
+        path: /app01-srv01(/|$)(.*)
         backend:
           service:
             name: srv01-service
             port:
               number: 8080
       - pathType: Prefix
-        path: /app02/srv02(/|$)(.*)
+        # path: /app01/srv02(/|$)(.*)
+        path: /app01-srv02(/|$)(.*)
         backend:
           service:
             name: srv02-service
